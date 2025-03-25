@@ -20,7 +20,6 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
-import io.flutter.plugin.common.PluginRegistry.Registrar
 import java.lang.NullPointerException
 import java.util.*
 import kotlin.collections.HashMap
@@ -34,7 +33,6 @@ class FlutterFacebookSdkPlugin : FlutterPlugin, MethodCallHandler, StreamHandler
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
     /// when the Flutter Engine is detached from the Activity
 
-    private lateinit var registrar: Registrar
     private lateinit var methodChannel: MethodChannel
     private lateinit var eventChannel: EventChannel
     private lateinit var logger: AppEventsLogger
@@ -47,12 +45,6 @@ class FlutterFacebookSdkPlugin : FlutterPlugin, MethodCallHandler, StreamHandler
     private var eventSink: EventSink? = null
     private var context: Context? = null
     private var activityPluginBinding: ActivityPluginBinding? = null
-
-    //  fun registerWith(registrar: Registrar) {
-    //    val plugin = FlutterFacebookSdkPlugin()
-    //    methodChannel = MethodChannel(registrar.messenger(), PLATFORM_CHANNEL)
-    //    methodChannel.setMethodCallHandler(this)
-    //  }
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         methodChannel = MethodChannel(flutterPluginBinding.binaryMessenger, PLATFORM_CHANNEL)
